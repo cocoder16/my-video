@@ -1,16 +1,13 @@
 @charset "utf-8";
-.my-video input[type=range] { -webkit-appearance: none; cursor: pointer; padding: 0; margin: 0; } 
+.my-video input[type=range] { -webkit-appearance: none; cursor: pointer; padding: 0; margin: 0; background-color: rgba(0,0,0,0); }
 .my-video input[type=range]:focus { outline: none; }
 /*chrome, safari, opera*/
 .my-video input[type=range]::-webkit-slider-runnable-track { background-color: #ddd; overflow: hidden; }
 .my-video input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #004b94; box-shadow: -500vw 0 0 500vw #1e90ff; }
-/*firefox*/
+/*firefox*/ 
 .my-video input[type=range]::-moz-range-track { background-color: #ddd; } 
 .my-video input[type=range]::-moz-range-thumb { background-color: #004b94; border: none; border-radius: 0; } 
 .my-video input[type=range]::-moz-range-progress { background: #1e90ff; }
-@-moz-document url-prefix() {
-   .my-video input[type=range] { background-color: rgba(0,0,0,0); }
-}
         
 /*IE*/
 .my-video input[type=range]::-ms-track { background: #1e90ff; border: none;
@@ -40,10 +37,14 @@
 .my-video .progress input[type=range] { width: 100%; float: left; }
 .my-video input[type=range]::-webkit-slider-runnable-track { height: 6px; }
 .my-video input[type=range]::-webkit-slider-thumb { width: 10px; height: 6px; }
+/*볼륨공통*/
+.my-video .progress, .my-video .volume { position: relative; }
+.my-video input[type=range] { position: absolute; top: 0; bottom: 0; margin: auto; }
 /*firefox*/
 .my-video input[type=range]::-moz-range-track { height: 6px; } 
 .my-video input[type=range]::-moz-range-thumb { width: 10px; height: 6px; }
 .my-video input[type=range]::-moz-range-progress { height: 6px; } 
+
 /*IE*/
 .my-video input[type=range]::-ms-track { height: 6px; }
 .my-video input[type=range]::-ms-thumb { width: 10px; height: 6px; }
@@ -52,38 +53,41 @@
     .my-video input[type=range] { height: 6px; }
 }
 
-/*조작바*/
-.my-video .cell-wrap { display: table; width: 100%; }
-.my-video .cell, .volume { display: table-cell; height: 24px; width: 32px; vertical-align: middle; text-align: center; padding: 4px 4px 0 4px; }
-.my-video .text { width: 120px; padding-bottom: 5px; }
+/*조작바*//**/
+.my-video .cell-wrap { width: 100%; }
+.my-video .cell { height: 24px; width: 24px; position: relative;}
+.my-video .volume { height: 24px; width: 50px; }
+.my-video .cell-wrap .left { float: left; margin: 4px; }
+.my-video .cell-wrap .right { float: right; margin: 4px; }
+.my-video .cell-wrap .text { width: 120px; line-height: 19px; margin-left: 6px; }
 
-.my-video .play-btn { width: 30px; height: 30px; cursor: pointer; }
-.my-video .play-btn.onplay { background-image: url(./images/pauseBtn.png) }
-.my-video .play-btn.onpause { background-image: url(./images/playBtn.png) }
-.my-video .play-btn.onend { background-image: url(./images/replayBtn.png) }
+.my-video .btn { width: 24px; height: 24px; cursor: pointer; position: absolute; top: 50%; transform: translate(0, -50%); }
 
-.my-video .stop-btn { width: 30px; height: 30px; cursor: pointer; background-image: url(./images/stopBtn.png) }
+.my-video .play.btn.onplay { background-image: url(./images/pauseBtn.png) }
+.my-video .play.btn.onpause { background-image: url(./images/playBtn.png) }
+.my-video .play.btn.onend { background-image: url(./images/replayBtn.png) }
 
-.my-video .mute-btn { width: 20px; height: 20px; cursor: pointer; }
-.my-video .mute-btn.onsound { background-image: url(./images/onSoundBtn.png) }
-.my-video .mute-btn.offsound { background-image: url(./images/offSoundBtn.png) }
+.my-video .stop.btn { background-image: url(./images/stopBtn.png) }
 
-.my-video .volume input[type=range] { width: 50px; float: left; }
+.my-video .mute.btn.onsound { background-image: url(./images/onSoundBtn.png) }
+.my-video .mute.btn.offsound { background-image: url(./images/offSoundBtn.png) }
 
-.my-video .zoom-btn { width: 32px; height: 24px; cursor: pointer; }
-.my-video .zoom-btn.onzoomout { background-image: url(./images/zoomInBtn.png) }
-.my-video .zoom-btn.onzoomin { background-image: url(./images/zoomOutBtn.png) }
+.my-video .volume input[type=range] { width: 50px; }
 
-.my-video .full-btn { width: 24px; height: 24px; cursor: pointer; }
-.my-video .full-btn.onfull { background-image: url(./images/basicsizeBtn.png)}
-.my-video .full-btn.onbasic { background-image: url(./images/fullsizeBtn.png)}
+.my-video .zoom.cell { width: 32px; }
+.my-video .zoom.btn { width: 32px; }
+.my-video .zoom.btn.onzoomout { background-image: url(./images/zoomInBtn.png) }
+.my-video .zoom.btn.onzoomin { background-image: url(./images/zoomOutBtn.png) }
+
+.my-video .full.btn.onfull { background-image: url(./images/basicsizeBtn.png)}
+.my-video .full.btn.onbasic { background-image: url(./images/fullsizeBtn.png)}
 
 .my-video button[data-tooltip]:hover { position: relative; }
 .my-video button[data-tooltip]:hover:after { content: attr(data-tooltip); 
     background-color: #000; opacity: 0.8; box-shadow: 0 0 3px rgba(50, 50, 50, 0.4); border-radius: 5px; color: white;
     position: absolute; margin-bottom: 10px; bottom: 100%; padding: 7px 12px; width: auto; min-width: 50px; max-width: 300px; word-break: keep-all; font-size: 0.7rem; z-index: 1; }
-.my-video button[data-tooltip].left:hover:after { left: 0; }
-.my-video button[data-tooltip].right:hover:after { right: 0; }
+.my-video .cell.left button[data-tooltip]:hover:after { left: 0; }
+.my-video .cell.right button[data-tooltip]:hover:after { right: 0; }
 
 .my-video .alert-img { position: absolute; width: 50px; height: 50px; top: 0; left: 0; right: 0; bottom: 0; margin: auto; background-color: rgba(0,0,0,0.5); background-size: 100% 100%; border-radius: 50%; z-index: -1; }
 .my-video .alert-img.show-up-start { z-index: 0; opacity: 1; transform: none; }
