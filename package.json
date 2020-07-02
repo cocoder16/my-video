@@ -1,0 +1,19 @@
+{
+  "name": "my-video",
+  "version": "1.0.0",
+  "description": "custom video player",
+  "scripts": {
+    "test": "examples/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocoder16/my-video.git"
+  },
+  "keywords": [ "video player" ],
+  "author": "cocoder16",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cocoder16/my-video/issues"
+  },
+  "homepage": "https://github.com/cocoder16/my-video#readme"
+}
