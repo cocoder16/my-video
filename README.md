@@ -10,7 +10,7 @@ This is not a module but just a source code which store the idea to make a video
 
 ## How to use
 
-```
+```Javascript
 myVideo.create(parentNode, src, width, height);
 ```
 
@@ -18,8 +18,20 @@ myVideo.create(parentNode, src, width, height);
 |---------|----|-----------|
 |parentNode|Object|A video player will be created under this Element.|
 |src|String|The path where a video is located must be specified.|
-|[width]|Number|The video player's width (px). The default is 800.|
-|[height]|Number|The video player's height (px). The default is 450.|
+|[width]|Number or String|The video player's width (px or %). The default is 800px.|
+|[height]|Number or String|The video player's height (px or %). The default is 450px.|
+
+The examples are below.
+
+```Javascript
+// width: 400px, height: 225px
+var div = document.querySelector('div');
+myVideo.create(div, './videos/sample.mp4', 400, 225);
+
+// width: 100%, height: 56.25%
+var div = document.querySelector('div');
+myVideo.create(div, './videos/sample.mp4', '100%', '56.25%');
+```
 
 ## Features
 
