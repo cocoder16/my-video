@@ -3,17 +3,36 @@
   "version": "1.0.0",
   "description": "custom video player",
   "scripts": {
-    "test": "examples/index.html"
+    "start": "webpack-dev-server --mode=development --hot",
+    "cy:open": "cypress open"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cocoder16/my-video.git"
   },
-  "keywords": [ "video player" ],
+  "keywords": [
+    "video player"
+  ],
   "author": "cocoder16",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cocoder16/my-video/issues"
   },
-  "homepage": "https://github.com/cocoder16/my-video#readme"
+  "homepage": "https://github.com/cocoder16/my-video#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@types/jest": "^27.0.2",
+    "babel-jest": "^27.3.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "cypress": "^9.0.0",
+    "eslint": "^8.2.0",
+    "prettier": "^2.4.1",
+    "webpack": "^5.64.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
 }
