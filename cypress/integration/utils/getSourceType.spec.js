@@ -1,4 +1,4 @@
-import getSourceType from "../../../js/utils/getSourceType";
+import getSourceType from "../../../src/js/utils/getSourceType";
 
 describe("getSourceType", () => {
   it("convert", () => {

@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   context: __dirname, //webpack이 동작할 root디렉토리 (default는 프로젝트폴더인듯)
   entry: {
-    main: ["./js/index.js", "./css/index.css"], //개발할 코드의 시작점
+    main: ["./src/js/index.js", "./src/css/index.css"], //개발할 코드의 시작점
   },
   output: {
     //결과물이 위치할 곳

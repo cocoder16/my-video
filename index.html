@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body>
   <div class="video-sample-0">
-    <figure class="video-container">
+    <!-- <figure class="video-container">
       <video controls loop muted autoplay width=560 height=315 preload="metadata"
         poster="https://vjs.zencdn.net/v/oceans.png">
         <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
@@ -34,22 +33,9 @@
         <li><button id="voldec" type="button">Vol-</button></li>
         <li><button id="fs" type="button">Fullscreen</button></li>
       </ul>
-    </figure>
+    </figure> -->
   </div>
-  <script src="./js/index.js" type="module">
-    const videoSample = document.querySelector(".video-sample-0");
-
-    MyVideo({
-      parent: videoSample,
-      sources: [
-        "https://vjs.zencdn.net/v/oceans.mp4",
-        "https://vjs.zencdn.net/v/oceans.webm",
-        "https://vjs.zencdn.net/v/oceans.ogv"
-      ],
-      options: {
-        // video tag attr
-      }
-    });
+  <script src="./index.js" type="module">
   </script>
   <!-- <video
         id="my-player"

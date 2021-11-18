@@ -2,11 +2,11 @@ import getSourceType from "./utils/getSourceType.js";
 
 /**
  * MyVideo
- * @param {string} parent video player instance will be instanced on parent
+ * @param {Element}} parent video player instance will be instanced on parent
  * @param {string[]} sources soucrce url array
  * @param {object} options key (video tag attribute name) : value
  */
-export default function MyVideo(parent, sources, options) {
+export default function MyVideo({ parent, sources, options }) {
   const supportsVideo = !!document.createElement("video").canPlayType;
 
   if (!supportsVideo) {
