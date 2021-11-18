@@ -4,9 +4,9 @@ import getSourceType from "./utils/getSourceType.js";
  * MyVideo
  * @param {Element}} parent video player instance will be instanced on parent
  * @param {string[]} sources soucrce url array
- * @param {object} options key (video tag attribute name) : value
+ * @param {object} attributes key (video tag attribute name) : value
  */
-export default function MyVideo({ parent, sources, options }) {
+export default function MyVideo({ parent, sources, attributes }) {
   const supportsVideo = !!document.createElement("video").canPlayType;
 
   if (!supportsVideo) {
@@ -67,8 +67,20 @@ export default function MyVideo({ parent, sources, options }) {
   }
 
   // attr 부여
+  if (attributes) {
+    Object.keys(attributes).forEach(attr => {
+      const attributeValue = attributes[attr];
+      const isBoolean = typeof attributeValue === "boolean";
 
-  // DOM에 기능부여
+      if (isBoolean) {
+        video[attr] = attributeValue;
+      } else {
+        video.setAttribute(attr, attributeValue);
+      }
+    });
+  }
+
+  // control bar
 
   // parent에 생성
   parent.appendChild(videoContainer);

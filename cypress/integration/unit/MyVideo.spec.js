@@ -21,4 +21,16 @@ describe("MyVideo unit test", () => {
       );
     });
   });
+
+  it("create video with attributes", () => {
+    cy.fixture("poster").then(({ poster }) => {
+      const parentNode = document.createElement("div");
+      const myVideo = MyVideo({
+        parent: parentNode,
+        attributes: { controls: true, loop: false, poster },
+      });
+
+      expect(myVideo).to.html(`<video controls="" poster="https://vjs.zencdn.net/v/oceans.png"></video>`);
+    });
+  });
 });

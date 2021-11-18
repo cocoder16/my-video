@@ -9,7 +9,13 @@ MyVideo({
     "https://vjs.zencdn.net/v/oceans.webm",
     "https://vjs.zencdn.net/v/oceans.ogv",
   ],
-  options: {
-    // video tag attr
+  attributes: {
+    controls: true,
+    loop: false,
+    muted: true,
+    autoplay: true,
+    width: 560,
+    height: 315,
+    poster: "https://vjs.zencdn.net/v/oceans.png",
   },
 });
