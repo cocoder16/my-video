@@ -1,16 +1,33 @@
 import getSourceType from "./utils/getSourceType.js";
+import PlayPause from "./controls/PlayPause.js";
 
 /**
  * MyVideo
- * @param {Element}} parent video player instance will be instanced on parent
- * @param {string[]} sources soucrce url array
- * @param {object} attributes key (video tag attribute name) : value
+ * @param {Element} parent video player will be instanced on parent
+ * @param {object} configuration sources, attributes, options
+ * @param {string[]} configuration.sources soucrce url array
+ * @param {object} configuration.attributes key (video tag attribute name) : value
+ * @param {object} configuration.options detail options https://github.com/cocoder16/my-video
  */
-export default function MyVideo({ parent, sources, attributes }) {
+export default function MyVideo(parent, { sources = [], attributes = {}, options = {} } = {}) {
+  const {
+    useMaterialIcon = true,
+    playButtonIcon = "play_arrow",
+    pauseButtonIcon = "Pause",
+    stopBtnIcon = "",
+    muteBtnIcon = "",
+    defaultVolume = 1,
+    useLoadProgress = false,
+  } = options;
+
   const supportsVideo = !!document.createElement("video").canPlayType;
 
   if (!supportsVideo) {
     throw new Error("video is not supported!");
+  }
+
+  if (!parent) {
+    throw new Error("parent element not found");
   }
 
   // <figure class="video-container">
@@ -39,17 +56,8 @@ export default function MyVideo({ parent, sources, attributes }) {
   //         </ul>
   // </figure>
 
-  // TODO: controller는 각각 생성자함수로 파일 분리, options 값에 따라 생성
   const videoContainer = document.createElement("figure");
   const video = document.createElement("video");
-  const controlBar = document.createElement("ul");
-  const playController = document.createElement("li");
-  const stopController = document.createElement("li");
-  const muteController = document.createElement("li");
-  const volumnController = document.createElement("li");
-  const progressController = document.createElement("li");
-  const pictureInPictureController = document.createElement("li");
-  const fullscreenController = document.createElement("li");
 
   // DOM 생성
   videoContainer.appendChild(video);
@@ -81,6 +89,33 @@ export default function MyVideo({ parent, sources, attributes }) {
   }
 
   // control bar
+  const isControlBar = attributes && attributes.controls;
+
+  if (isControlBar) {
+    video.controls = false;
+
+    // material icon cdn import
+    const headTag = document.querySelector("head");
+    const linkTag = document.createElement("link");
+    linkTag.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
+    linkTag.rel = "stylesheet";
+    headTag.appendChild(linkTag);
+
+    // create controlBar
+    const controlBar = document.createElement("ul");
+    controlBar.className = "controls";
+
+    const playPause = controlBar.appendChild(new PlayPause(useMaterialIcon, playButtonIcon, pauseButtonIcon));
+
+    // TODO: controller는 각각 생성자함수로 파일 분리, options 값에 따라 생성
+    // const stopController = document.createElement("li");
+    // const muteController = document.createElement("li");
+    // const volumnController = document.createElement("li");
+    // const progressController = document.createElement("li");
+    // const pictureInPictureController = document.createElement("li");
+    // const fullscreenController = document.createElement("li");
+    videoContainer.appendChild(controlBar);
+  }
 
   // parent에 생성
   parent.appendChild(videoContainer);
