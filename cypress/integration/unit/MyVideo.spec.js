@@ -3,11 +3,33 @@
 import MyVideo from "../../../src/js/index";
 
 describe("MyVideo unit test", () => {
+  const defaultOptions = {
+    useMaterialIcon: true,
+    playButtonIcon: "play_arrow",
+    pauseButtonIcon: "pause",
+    stopButtonIcon: "",
+    muteButtonIcon: "",
+    defaultVolume: 1,
+    useLoadProgress: false,
+    skipStep: 10,
+  };
+  const defaultHotKey = {
+    playPauseKey: " ",
+    stopKey: "s",
+    muteKey: "m",
+    volumeUpKey: "ArrowUp",
+    volumeDownKey: "ArrowDown",
+    toPrevStepKey: "ArrowLeft",
+    toNextStepKey: "ArrowRight",
+    pictureInPictureKey: "p",
+    fullscreenKey: "f",
+  };
+
   it("create empty source video", () => {
     const parentElement = document.createElement("div");
     const myVideo = MyVideo(parentElement);
 
-    expect(parentElement).to.html("<figure><video></video></figure>");
+    expect(parentElement).to.html(`<figure class="video-manager" tabindex="0"><video></video></figure>`);
     expect(myVideo).to.html("<video></video>");
   });
 
@@ -32,28 +54,7 @@ describe("MyVideo unit test", () => {
       expect(myVideo).to.html(`<video autoplay="" poster="https://vjs.zencdn.net/v/oceans.png"></video>`);
     });
   });
-  // options: {
-  //   playBtnIconSrc: "", // icon 부류 default는 Material icon
-  //   PauseBtnIconSrc: "",
-  //   stopBtnIconSrc: "",
-  //   muteBtnIconSrc: "",
-  //   defaultVolume: 0.5, // default 1
-  //   useLoadProgress: true, // default false
-  // },
 
-  //     <ul id="video-controls" class="controls">
-  //         <li><button id="playpause" type="button">Play/Pause</button></li>
-  //         <li><button id="stop" type="button">Stop</button></li>
-  //         <li class="progress">
-  //             <progress id="progress" value="0" min="0">
-  //                 <span id="progress-bar"></span>
-  //             </progress>
-  //         </li>
-  //         <li><button id="mute" type="button">Mute/Unmute</button></li>
-  //         <li><button id="volinc" type="button">Vol+</button></li>
-  //         <li><button id="voldec" type="button">Vol-</button></li>
-  //         <li><button id="fs" type="button">Fullscreen</button></li>
-  //         </ul>
   it("default options with control bar", () => {
     const parentElement = document.createElement("div");
     MyVideo(parentElement, {
@@ -66,7 +67,7 @@ describe("MyVideo unit test", () => {
 
     expect(controlBar).to.not.equal(null);
     expect(playPauseButtonIcon).to.have.class("material-icons");
-    expect(playPauseButtonIcon).to.contain("play_arrow");
+    expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
   });
 
   it("play-pause button click", () => {
@@ -75,6 +76,52 @@ describe("MyVideo unit test", () => {
       attributes: { controls: true },
     });
 
-    const playPauseButtonIcon = document.querySelector("figure .play-pause button");
+    const video = parentElement.querySelector("figure.video-manager video");
+    const playPauseButton = parentElement.querySelector("figure ul.controls .play-pause button");
+    const playPauseButtonIcon = playPauseButton.querySelector("span");
+
+    playPauseButton.click();
+    let isPlaying = !(video.paused || video.ended);
+
+    expect(playPauseButtonIcon).to.contain(defaultOptions.pauseButtonIcon);
+    expect(isPlaying).to.be.true;
+
+    cy.wait(10).then(() => {
+      playPauseButton.click();
+      isPlaying = !(video.paused || video.ended);
+
+      expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
+      expect(isPlaying).to.be.false;
+    });
   });
+
+  it("play-pause hotkey", () => {
+    const parentElement = document.createElement("div");
+    MyVideo(parentElement, {
+      attributes: { controls: true },
+    });
+
+    const videoManager = parentElement.querySelector("figure.video-manager");
+    const video = videoManager.querySelector("video");
+    const playPauseButton = videoManager.querySelector("ul.controls .play-pause button");
+    const playPauseButtonIcon = playPauseButton.querySelector("span");
+    const playPauseHotKeyEvent = new KeyboardEvent("keydown", { key: defaultHotKey.playPauseKey });
+
+    videoManager.dispatchEvent(playPauseHotKeyEvent);
+    let isPlaying = !(video.paused || video.ended);
+
+    expect(playPauseButtonIcon).to.contain(defaultOptions.pauseButtonIcon);
+    expect(isPlaying).to.be.true;
+
+    cy.wait(10).then(() => {
+      videoManager.dispatchEvent(playPauseHotKeyEvent);
+      isPlaying = !(video.paused || video.ended);
+
+      expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
+      expect(isPlaying).to.be.false;
+    });
+  });
+
+  // TODO: 다른 키들도 디폴트 옵션 테스트
+  // TODO: 커스텀 옵션, 핫키 테스트
 });

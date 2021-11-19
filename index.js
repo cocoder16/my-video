@@ -20,10 +20,24 @@ MyVideo(videoSample, {
   // options: {
   //   useMaterialIcon: false, // default true
   //   playButtonIcon: "", // icon 부류 default는 Material icon, 1) material font 값이나, 2) 리소스 경로값
-  //   PauseBtnIcon: "",
-  //   stopBtnIcon: "",
-  //   muteBtnIcon: "",
+  //   pauseButtonIcon: "",
+  //   stopButtonIcon: "",
+  //   muteButtonIcon: "",
+  //   pictureInPictureButtonIcon: "",
+  //   fullscreenButtonIcon: "",
   //   defaultVolume: 0.5, // default 1
   //   useLoadProgress: true, // default false
+  //   skipStep: 5, // default 10
+  // },
+  // hotkey: {
+  //   playPauseKey: "", // default spacebar
+  //   stopKey: "", // default s
+  //   muteKey: "", // default m
+  //   volumeUpKey: "", // default up arrow
+  //   volumeDownKey: "", // default down arrow
+  //   toPrevStepKey: "", // default left arrow
+  //   toNextStepKey: "", // default right arrow
+  //   pictureInPictureKey: "", // default p
+  //   fullscreenKey: "", // default f
   // },
 });
