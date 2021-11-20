@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "custom video player",
   "scripts": {
-    "start": "webpack-dev-server --mode=development --hot",
+    "build": "webpack --mode=development --config ./webpack.config",
+    "start": "webpack serve --open --mode=development --hot",
     "cy:open": "cypress open"
   },
   "repository": {
@@ -24,9 +25,9 @@
     "@babel/preset-env": "^7.16.0",
     "@types/jest": "^27.0.2",
     "babel-jest": "^27.3.1",
-    "clean-webpack-plugin": "^4.0.0",
     "cypress": "^9.0.0",
     "eslint": "^8.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "prettier": "^2.4.1",
     "webpack": "^5.64.1",
     "webpack-cli": "^4.9.1",

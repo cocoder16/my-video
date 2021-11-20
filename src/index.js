@@ -1,4 +1,4 @@
-import MyVideo from "./src/js/index.js";
+import MyVideo from "./js/index.js";
 
 const videoSample = document.querySelector(".video-sample-0");
 
@@ -22,7 +22,9 @@ MyVideo(videoSample, {
   //   playButtonIcon: "", // icon 부류 default는 Material icon, 1) material font 값이나, 2) 리소스 경로값
   //   pauseButtonIcon: "",
   //   stopButtonIcon: "",
-  //   muteButtonIcon: "",
+  // volumeOffButtonIcon = "volume_off",
+  //   volumeLowOnButtonIcon = "volume_down",
+  //   volumeHighOnButtonIcon = "volume_up",
   //   pictureInPictureButtonIcon: "",
   //   fullscreenButtonIcon: "",
   //   defaultVolume: 0.5, // default 1
