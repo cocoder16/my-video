@@ -12,7 +12,7 @@ export default function PictureInPicture(useMaterialIcon, pictureInPictureButton
 
   pictureInPicture.appendChild(button);
   button.appendChild(icon);
-
+  button.setAttribute("type", "button");
   pictureInPicture.className = "picture-in-picture";
   icon.className = "material-icons";
 

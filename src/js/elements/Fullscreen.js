@@ -12,7 +12,7 @@ export default function Fullscreen(useMaterialIcon, fullscreenButtonIcon) {
 
   fullscreen.appendChild(button);
   button.appendChild(icon);
-
+  button.setAttribute("type", "button");
   fullscreen.className = "fullscreen";
   icon.className = "material-icons";
 

@@ -12,7 +12,7 @@ export default function Stop(useMaterialIcon, stopButtonIcon) {
 
   stop.appendChild(button);
   button.appendChild(icon);
-
+  button.setAttribute("type", "button");
   stop.className = "stop";
   icon.className = "material-icons";
 

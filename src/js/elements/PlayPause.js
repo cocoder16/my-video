@@ -14,7 +14,7 @@ export default function PlayPause(useMaterialIcon, playButtonIcon, pauseButtonIc
 
   playPause.appendChild(button);
   button.appendChild(icon);
-
+  button.setAttribute("type", "button");
   playPause.className = "play-pause";
   icon.className = "material-icons";
 

@@ -95,7 +95,29 @@ describe("MyVideo unit test", () => {
     expect(fullscreenButtonIcon).to.contain(defaultOptions.fullscreenButtonIcon);
   });
 
-  it("play-pause button click", () => {
+  it("play-pause by video click", () => {
+    const parentElement = document.createElement("div");
+    MyVideo(parentElement, {
+      attributes: { controls: true },
+    });
+
+    const video = parentElement.querySelector("figure.video-manager video");
+    const playPauseButtonIcon = parentElement.querySelector("figure.video-manager ul.controls .play-pause button span");
+
+    video.click();
+    let isPlaying = !(video.paused || video.ended);
+
+    expect(playPauseButtonIcon).to.contain(defaultOptions.pauseButtonIcon);
+    expect(isPlaying).to.be.true;
+
+    video.click();
+    isPlaying = !(video.paused || video.ended);
+
+    expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
+    expect(isPlaying).to.be.false;
+  });
+
+  it("play-pause by button click", () => {
     const parentElement = document.createElement("div");
     MyVideo(parentElement, {
       attributes: { controls: true },
@@ -111,16 +133,14 @@ describe("MyVideo unit test", () => {
     expect(playPauseButtonIcon).to.contain(defaultOptions.pauseButtonIcon);
     expect(isPlaying).to.be.true;
 
-    cy.wait(10).then(() => {
-      playPauseButton.click();
-      isPlaying = !(video.paused || video.ended);
+    playPauseButton.click();
+    isPlaying = !(video.paused || video.ended);
 
-      expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
-      expect(isPlaying).to.be.false;
-    });
+    expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
+    expect(isPlaying).to.be.false;
   });
 
-  it("play-pause hotkey", () => {
+  it("play-pause by hotkey", () => {
     const parentElement = document.createElement("div");
     MyVideo(parentElement, {
       attributes: { controls: true },
@@ -128,8 +148,7 @@ describe("MyVideo unit test", () => {
 
     const videoManager = parentElement.querySelector("figure.video-manager");
     const video = videoManager.querySelector("video");
-    const playPauseButton = videoManager.querySelector("ul.controls .play-pause button");
-    const playPauseButtonIcon = playPauseButton.querySelector("span");
+    const playPauseButtonIcon = videoManager.querySelector("ul.controls .play-pause button span");
     const playPauseHotKeyEvent = new KeyboardEvent("keydown", { key: defaultHotKey.playPauseKey });
 
     videoManager.dispatchEvent(playPauseHotKeyEvent);
@@ -138,13 +157,11 @@ describe("MyVideo unit test", () => {
     expect(playPauseButtonIcon).to.contain(defaultOptions.pauseButtonIcon);
     expect(isPlaying).to.be.true;
 
-    cy.wait(10).then(() => {
-      videoManager.dispatchEvent(playPauseHotKeyEvent);
-      isPlaying = !(video.paused || video.ended);
+    videoManager.dispatchEvent(playPauseHotKeyEvent);
+    isPlaying = !(video.paused || video.ended);
 
-      expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
-      expect(isPlaying).to.be.false;
-    });
+    expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
+    expect(isPlaying).to.be.false;
   });
 
   // TODO: 다른 키들도 디폴트 옵션 테스트

@@ -23,7 +23,7 @@ export default function Speaker(
 
   speaker.appendChild(button);
   button.appendChild(icon);
-
+  button.setAttribute("type", "button");
   speaker.className = "speaker";
   icon.className = "material-icons";
 

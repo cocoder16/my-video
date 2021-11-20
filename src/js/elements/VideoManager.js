@@ -124,6 +124,7 @@ export default function VideoManager(isControlBar, attributes, options, hotkey) 
   };
 
   // event listener
+  videoManager.video.addEventListener("click", videoManager.playOrPause);
   playPause.button.addEventListener("click", videoManager.playOrPause);
 
   // hotkey
