@@ -25,9 +25,13 @@ MyVideo(videoSample, {
   // volumeOffButtonIcon = "volume_off",
   //   volumeLowOnButtonIcon = "volume_down",
   //   volumeHighOnButtonIcon = "volume_up",
+  // volumeUpIcon = "volume_up",
+  //   volumeDownIcon = "volume_down"
   //   pictureInPictureButtonIcon: "",
   //   fullscreenButtonIcon: "",
   //   defaultVolume: 0.5, // default 1
+  //   initialCurrentTime: 10, // default 0
+  // highLowBoundaryOfVolume = 0.5,
   //   useLoadProgress: true, // default false
   //   skipStep: 5, // default 10
   // },

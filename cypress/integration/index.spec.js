@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe("example integration test", () => {
+describe("dist integration test", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000");
   });

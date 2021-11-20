@@ -7,9 +7,17 @@ describe("MyVideo unit test", () => {
     useMaterialIcon: true,
     playButtonIcon: "play_arrow",
     pauseButtonIcon: "pause",
-    stopButtonIcon: "",
-    muteButtonIcon: "",
-    defaultVolume: 1,
+    stopButtonIcon: "stop",
+    volumeOffButtonIcon: "volume_off",
+    volumeLowOnButtonIcon: "volume_down",
+    volumeHighOnButtonIcon: "volume_up",
+    volumeUpIcon: "volume_up",
+    volumeDownIcon: "volume_down",
+    pictureInPictureButtonIcon: "picture_in_picture",
+    fullscreenButtonIcon: "fullscreen",
+    // defaultVolume: video.muted ? 0 : 1,
+    initialCurrentTime: 0,
+    highLowBoundaryOfVolume: 0.5,
     useLoadProgress: false,
     skipStep: 10,
   };
@@ -62,12 +70,29 @@ describe("MyVideo unit test", () => {
     });
 
     const controlBar = parentElement.querySelector("figure ul.controls");
-    const playPause = controlBar.querySelector(".play-pause");
-    const playPauseButtonIcon = playPause.querySelector("button span");
+    const volumeSlider = controlBar.querySelector(".volume-slider");
+    const videoProgress = controlBar.querySelector(".video-progress");
+    const currentTime = controlBar.querySelector(".current-time");
+    const playPauseButtonIcon = controlBar.querySelector(".play-pause button span");
+    const stopButtonIcon = controlBar.querySelector(".stop button span");
+    const speakerButtonIcon = controlBar.querySelector(".speaker button span");
+    const pictureInPictureButtonIcon = controlBar.querySelector(".picture-in-picture button span");
+    const fullscreenButtonIcon = controlBar.querySelector(".fullscreen button span");
 
     expect(controlBar).to.not.equal(null);
+    expect(volumeSlider).to.not.equal(null);
+    expect(videoProgress).to.not.equal(null);
+    expect(currentTime).to.not.equal(null);
     expect(playPauseButtonIcon).to.have.class("material-icons");
     expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
+    expect(stopButtonIcon).to.have.class("material-icons");
+    expect(stopButtonIcon).to.contain(defaultOptions.stopButtonIcon);
+    expect(speakerButtonIcon).to.have.class("material-icons");
+    expect(speakerButtonIcon).to.contain(defaultOptions.volumeHighOnButtonIcon);
+    expect(pictureInPictureButtonIcon).to.have.class("material-icons");
+    expect(pictureInPictureButtonIcon).to.contain(defaultOptions.pictureInPictureButtonIcon);
+    expect(fullscreenButtonIcon).to.have.class("material-icons");
+    expect(fullscreenButtonIcon).to.contain(defaultOptions.fullscreenButtonIcon);
   });
 
   it("play-pause button click", () => {

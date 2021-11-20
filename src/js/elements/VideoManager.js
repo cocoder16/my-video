@@ -1,11 +1,18 @@
 import PlayPause from "./PlayPause.js";
-
+import Stop from "./Stop.js";
+import Speaker from "./Speaker.js";
+import VolumeSlider from "./VolumeSlider.js";
+import VideoProgress from "./VideoProgress.js";
+import CurrentTime from "./CurrentTime.js";
+import PictureInPicture from "./PictureInPicture.js";
+import Fullscreen from "./Fullscreen.js";
 /**
  * VideoManager
  * @param {boolean} isControlBar whether to use controls attr
  * @param {object} attributes key (video tag attribute name) : value
  * @param {object} options detail options https://github.com/cocoder16/my-video
  * @param {object} hotkey hotkey for controls
+ * @returns {Element} video manager element
  */
 export default function VideoManager(isControlBar, attributes, options, hotkey) {
   const videoManager = document.createElement("figure");
@@ -38,12 +45,18 @@ export default function VideoManager(isControlBar, attributes, options, hotkey) 
     useMaterialIcon = true,
     playButtonIcon = "play_arrow",
     pauseButtonIcon = "pause",
-    stopButtonIcon = "",
-    muteButtonIcon = "",
-    pictureInPictureButtonIcon = "",
-    fullscreenButtonIcon = "",
-    defaultVolume = 1,
-    useLoadProgress = false,
+    stopButtonIcon = "stop",
+    volumeOffButtonIcon = "volume_off",
+    volumeLowOnButtonIcon = "volume_down",
+    volumeHighOnButtonIcon = "volume_up",
+    volumeUpIcon = "volume_up",
+    volumeDownIcon = "volume_down",
+    pictureInPictureButtonIcon = "picture_in_picture",
+    fullscreenButtonIcon = "fullscreen",
+    defaultVolume = video.muted ? 0 : 1,
+    initialCurrentTime = 0,
+    highLowBoundaryOfVolume = 0.5,
+    useLoadVideoProgress = false,
     skipStep = 10,
   } = options;
 
@@ -72,20 +85,32 @@ export default function VideoManager(isControlBar, attributes, options, hotkey) 
 
   // create DOM
   const controlContainer = document.createElement("ul");
-  const playPause = new PlayPause(video, useMaterialIcon, playButtonIcon, pauseButtonIcon);
+  const playPause = new PlayPause(useMaterialIcon, playButtonIcon, pauseButtonIcon, video.autoplay);
+  const stop = new Stop(useMaterialIcon, stopButtonIcon);
+  const speaker = new Speaker(
+    useMaterialIcon,
+    volumeOffButtonIcon,
+    volumeLowOnButtonIcon,
+    volumeHighOnButtonIcon,
+    defaultVolume,
+    highLowBoundaryOfVolume
+  );
+  const volumeSlider = new VolumeSlider(defaultVolume);
+  const videoProgress = new VideoProgress(video.duration, initialCurrentTime);
+  const currentTime = new CurrentTime(initialCurrentTime);
+  const pictureInPicture = new PictureInPicture(useMaterialIcon, pictureInPictureButtonIcon);
+  const fullscreen = new Fullscreen(useMaterialIcon, fullscreenButtonIcon);
 
   controlContainer.className = "controls";
   controlContainer.appendChild(playPause);
+  controlContainer.appendChild(stop);
+  controlContainer.appendChild(speaker);
+  controlContainer.appendChild(volumeSlider);
+  controlContainer.appendChild(videoProgress);
+  controlContainer.appendChild(currentTime);
+  controlContainer.appendChild(pictureInPicture);
+  controlContainer.appendChild(fullscreen);
   videoManager.appendChild(controlContainer);
-
-  // // TODO: controller는 각각 생성자함수로 파일 분리, options 값에 따라 생성
-  // // const stopController = document.createElement("li");
-  // // const muteController = document.createElement("li");
-  // // const volumnController = document.createElement("li");
-  // // const progressController = document.createElement("li");
-  // // const pictureInPictureController = document.createElement("li");
-  // // const fullscreenController = document.createElement("li");
-  // videoContainer.appendChild(controlBar);
 
   // event handler method
   videoManager.playOrPause = function playOrPause() {
