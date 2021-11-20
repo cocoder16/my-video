@@ -1,3 +1,5 @@
+import formatTime from "../utils/formatTime";
+
 /**
  * CurrentTime Element
  * @param {number} initialCurrentTime video initial current time
@@ -12,8 +14,7 @@ export default function CurrentTime(initialCurrentTime) {
 
   currentTime.className = "current-time";
 
-  text.textContent = "00:00";
-  // text.textContent = convertTimeToClock(initialCurrentTime);
+  text.textContent = formatTime(initialCurrentTime);
 
   return currentTime;
 }
