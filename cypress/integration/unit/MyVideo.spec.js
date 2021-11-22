@@ -105,14 +105,14 @@ describe("MyVideo unit test", () => {
     const playPauseButtonIcon = parentElement.querySelector("figure.video-manager ul.controls .play-pause button span");
 
     video.click();
-    let isPlaying = !(video.paused || video.ended);
 
+    let isPlaying = !(video.paused || video.ended);
     expect(playPauseButtonIcon).to.contain(defaultOptions.pauseButtonIcon);
     expect(isPlaying).to.be.true;
 
     video.click();
-    isPlaying = !(video.paused || video.ended);
 
+    isPlaying = !(video.paused || video.ended);
     expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
     expect(isPlaying).to.be.false;
   });
@@ -128,14 +128,14 @@ describe("MyVideo unit test", () => {
     const playPauseButtonIcon = playPauseButton.querySelector("span");
 
     playPauseButton.click();
-    let isPlaying = !(video.paused || video.ended);
 
+    let isPlaying = !(video.paused || video.ended);
     expect(playPauseButtonIcon).to.contain(defaultOptions.pauseButtonIcon);
     expect(isPlaying).to.be.true;
 
     playPauseButton.click();
-    isPlaying = !(video.paused || video.ended);
 
+    isPlaying = !(video.paused || video.ended);
     expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
     expect(isPlaying).to.be.false;
   });
@@ -152,15 +152,91 @@ describe("MyVideo unit test", () => {
     const playPauseHotKeyEvent = new KeyboardEvent("keydown", { key: defaultHotKey.playPauseKey });
 
     videoManager.dispatchEvent(playPauseHotKeyEvent);
-    let isPlaying = !(video.paused || video.ended);
 
+    let isPlaying = !(video.paused || video.ended);
     expect(playPauseButtonIcon).to.contain(defaultOptions.pauseButtonIcon);
     expect(isPlaying).to.be.true;
 
     videoManager.dispatchEvent(playPauseHotKeyEvent);
-    isPlaying = !(video.paused || video.ended);
 
+    isPlaying = !(video.paused || video.ended);
     expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
     expect(isPlaying).to.be.false;
+  });
+
+  it("stop by clicking button when playing", () => {
+    const parentElement = document.createElement("div");
+    MyVideo(parentElement, {
+      attributes: { controls: true },
+    });
+
+    const videoManager = parentElement.querySelector("figure.video-manager");
+    const video = videoManager.querySelector("video");
+    const stopButton = videoManager.querySelector("ul.controls .stop button");
+
+    video.play();
+    stopButton.click();
+
+    let isStopped = video.paused || video.ended;
+    expect(isStopped).to.be.true;
+  });
+
+  it("stop by hotkey when playing", () => {
+    const parentElement = document.createElement("div");
+    MyVideo(parentElement, {
+      attributes: { controls: true },
+    });
+
+    const videoManager = parentElement.querySelector("figure.video-manager");
+    const video = videoManager.querySelector("video");
+    const stopHotKeyEvent = new KeyboardEvent("keydown", { key: defaultHotKey.stopKey });
+
+    video.play();
+    videoManager.dispatchEvent(stopHotKeyEvent);
+
+    let isStopped = video.paused || video.ended;
+    expect(isStopped).to.be.true;
+  });
+
+  it("mute-unmute by clicking button when default options", () => {
+    const parentElement = document.createElement("div");
+    MyVideo(parentElement, {
+      attributes: { controls: true },
+    });
+
+    const videoManager = parentElement.querySelector("figure.video-manager");
+    const video = videoManager.querySelector("video");
+    const speakerButton = videoManager.querySelector("ul.controls .speaker button");
+
+    speakerButton.click();
+
+    let isMuted = video.muted;
+    expect(isMuted).to.be.true;
+
+    speakerButton.click();
+
+    isMuted = video.muted;
+    expect(isMuted).to.be.false;
+  });
+
+  it("mute-unmute by hotkey when default options", () => {
+    const parentElement = document.createElement("div");
+    MyVideo(parentElement, {
+      attributes: { controls: true },
+    });
+
+    const videoManager = parentElement.querySelector("figure.video-manager");
+    const video = videoManager.querySelector("video");
+    const muteKeyEvent = new KeyboardEvent("keydown", { key: defaultHotKey.muteKey });
+
+    videoManager.dispatchEvent(muteKeyEvent);
+
+    let isMuted = video.muted;
+    expect(isMuted).to.be.true;
+
+    videoManager.dispatchEvent(muteKeyEvent);
+
+    isMuted = video.muted;
+    expect(isMuted).to.be.false;
   });
 });

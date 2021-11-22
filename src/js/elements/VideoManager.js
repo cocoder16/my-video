@@ -123,14 +123,38 @@ export default function VideoManager(isControlBar, attributes, options, hotkey) 
     }
   };
 
+  videoManager.stop = function stop() {
+    video.pause();
+    video.currentTime = 0;
+    videoProgress.progress = 0;
+  };
+
+  videoManager.toggleMute = function toggleMute() {
+    video.muted = !video.muted;
+  };
+
   // event listener
   videoManager.video.addEventListener("click", videoManager.playOrPause);
   playPause.button.addEventListener("click", videoManager.playOrPause);
+  stop.button.addEventListener("click", videoManager.stop);
+  speaker.button.addEventListener("click", videoManager.toggleMute);
 
   // hotkey
   videoManager.addEventListener("keydown", function (event) {
     if (event.key === playPauseKey) {
       videoManager.playOrPause();
+    }
+  });
+
+  videoManager.addEventListener("keydown", function (event) {
+    if (event.key === stopKey) {
+      videoManager.stop();
+    }
+  });
+
+  videoManager.addEventListener("keydown", function (event) {
+    if (event.key === muteKey) {
+      videoManager.toggleMute();
     }
   });
 

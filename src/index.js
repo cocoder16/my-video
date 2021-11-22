@@ -1,7 +1,6 @@
 import MyVideo from "./js/index.js";
 
 const videoSample = document.querySelector(".video-sample-0");
-
 MyVideo(videoSample, {
   sources: [
     "https://vjs.zencdn.net/v/oceans.mp4",
