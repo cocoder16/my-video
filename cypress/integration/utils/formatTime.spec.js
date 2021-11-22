@@ -20,8 +20,9 @@ describe("formatTime", () => {
     expect(formatTime(48025)).to.equal("13:20:25");
     expect(formatTime(216000)).to.equal("60:00:00");
     expect(formatTime(360000)).to.equal("100:00:00");
+  });
 
-    // exception
+  it("handle exception argument", () => {
     expect(formatTime()).to.equal("");
     expect(formatTime(0.1)).to.equal("");
     expect(formatTime(" ")).to.equal("");

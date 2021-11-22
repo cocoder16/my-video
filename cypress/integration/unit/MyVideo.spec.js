@@ -63,7 +63,7 @@ describe("MyVideo unit test", () => {
     });
   });
 
-  it("default options with control bar", () => {
+  it("create control bar with default options", () => {
     const parentElement = document.createElement("div");
     MyVideo(parentElement, {
       attributes: { controls: true },
@@ -95,7 +95,7 @@ describe("MyVideo unit test", () => {
     expect(fullscreenButtonIcon).to.contain(defaultOptions.fullscreenButtonIcon);
   });
 
-  it("play-pause by video click", () => {
+  it("play-pause by clicking video when default options", () => {
     const parentElement = document.createElement("div");
     MyVideo(parentElement, {
       attributes: { controls: true },
@@ -117,7 +117,7 @@ describe("MyVideo unit test", () => {
     expect(isPlaying).to.be.false;
   });
 
-  it("play-pause by button click", () => {
+  it("play-pause by clicking button when default options", () => {
     const parentElement = document.createElement("div");
     MyVideo(parentElement, {
       attributes: { controls: true },
@@ -140,7 +140,7 @@ describe("MyVideo unit test", () => {
     expect(isPlaying).to.be.false;
   });
 
-  it("play-pause by hotkey", () => {
+  it("play-pause by hotkey when default options", () => {
     const parentElement = document.createElement("div");
     MyVideo(parentElement, {
       attributes: { controls: true },
@@ -163,7 +163,4 @@ describe("MyVideo unit test", () => {
     expect(playPauseButtonIcon).to.contain(defaultOptions.playButtonIcon);
     expect(isPlaying).to.be.false;
   });
-
-  // TODO: 다른 키들도 디폴트 옵션 테스트
-  // TODO: 커스텀 옵션, 핫키 테스트
 });
