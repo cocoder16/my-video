@@ -7,12 +7,12 @@
 
 ## Interface (outdated)
 
-|parameter|type|description|
-|---------|----|-----------|
-|parentNode|Object|A video player will be created under this Element.|
-|src|String|The path where a video is located must be specified.|
-|[width]|Number or String|The video player's width (px or %). The default is 800px.|
-|[height]|Number or String|The video player's height (px or %). The default is 450px.|
+| parameter  | type             | description                                                |
+| ---------- | ---------------- | ---------------------------------------------------------- |
+| parentNode | Object           | A video player will be created under this Element.         |
+| src        | String           | The path where a video is located must be specified.       |
+| [width]    | Number or String | The video player's width (px or %). The default is 800px.  |
+| [height]   | Number or String | The video player's height (px or %). The default is 450px. |
 
 ## reference
 
@@ -30,8 +30,3 @@ https://www.sitepoint.com/use-html5-full-screen-api/
 https://stackoverflow.com/questions/52706615/styling-button-tooltip
 https://webisfree.com/2015-05-14/[css]-%ED%95%B4%EB%8B%B9-contents%EC%9D%98-%EC%95%9E-%EB%92%A4%EC%97%90-%ED%8A%B9%EC%A0%95-%EB%AC%B8%EC%9E%A5-%EC%82%BD%EC%9E%85%ED%95%98%EA%B8%B0-content
 https://programmingsummaries.tistory.com/369
-
-## TODO
-
-npm모듈?
-인스턴스 메소드 추가? (바닐라 js 모듈로서 기능확장)
